@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<template id="__bundler_thumbnail" data-bg-color="#2a3566">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" fill="#2a3566"/>
+    <rect x="55" y="70" width="90" height="60" rx="6" fill="#ffffff" opacity="0.95"/>
+    <rect x="55" y="70" width="90" height="14" fill="#2f6bff"/>
+    <rect x="62" y="96" width="30" height="6" rx="2" fill="#cbd5e1"/>
+    <rect x="98" y="96" width="30" height="6" rx="2" fill="#cbd5e1"/>
+    <rect x="62" y="110" width="30" height="6" rx="2" fill="#e2e8f0"/>
+    <rect x="98" y="110" width="30" height="6" rx="2" fill="#e2e8f0"/>
+  </svg>
+</template>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Poppins', system-ui, sans-serif; }
+  ::-webkit-scrollbar { width: 9px; height: 9px; }
+  ::-webkit-scrollbar-thumb { background: rgba(100,116,139,.35); border-radius: 8px; }
+  ::-webkit-scrollbar-track { background: #f1f4f9; }
+</style>
+</helmet>
+<div style="display:flex; min-height:100vh; background:#eef1f6; font-family:'Poppins',system-ui,sans-serif; color:#334155;">
+
+  <!-- SIDEBAR -->
+  <aside style="width:228px; flex-shrink:0; background:#f4f6fa; color:#334155; display:flex; flex-direction:column; padding:0 0 24px; border-right:1px solid #e2e8f0;">
+    <div style="padding:22px 20px 18px; display:flex; align-items:center; gap:10px; border-bottom:1px solid #e2e8f0;">
+      <div style="width:34px; height:34px; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+        <svg viewBox="0 0 40 40" width="34" height="34"><path d="M20 2 L24 14 L37 14 L26 22 L30 36 L20 27 L10 36 L14 22 L3 14 L16 14 Z" fill="#e23b3b"/></svg>
+      </div>
+      <div style="line-height:1.1;">
+        <div style="font-weight:700; font-size:15px; letter-spacing:.3px; color:#1f2a4d;">KORIDOR UTILITI JOHOR</div>
+        <div style="font-size:6.5px; letter-spacing:.2px; color:#8b94a7; margin-top:3px;">AGENSI SEKTOR PENGURUSAN KORIDOR INFRASTRUKTUR UTILITI NEGERI JOHOR</div>
+      </div>
+    </div>
+
+    <div style="padding:6px 14px 0;">
+      <div onClick="{{ toggleDash }}" style="display:flex; align-items:center; gap:12px; padding:11px 12px; cursor:pointer; font-weight:600; font-size:14px; color:#334155;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 12 L16 9"/></svg>
+        <span style="flex:1;">Dashboard</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="2.5" style="transform:rotate({{ caretRot }}); transition:transform .2s;"><path d="M9 6 L15 12 L9 18"/></svg>
+      </div>
+
+      <sc-if value="{{ dashOpen }}" hint-placeholder-val="{{ true }}">
+      <div style="background:#fff; border-radius:8px; margin:6px 0 4px; padding:6px; box-shadow:0 6px 18px rgba(30,41,80,.08); border:1px solid #eef1f6;">
+        <sc-for list="{{ subItems }}" as="it" hint-placeholder-count="5">
+          <div onClick="{{ it.go }}" style="padding:9px 14px; font-size:13.5px; border-radius:6px; cursor:pointer; color:{{ it.color }}; font-weight:{{ it.weight }}; background:{{ it.bg }};">{{ it.label }}</div>
+        </sc-for>
+      </div>
+      </sc-if>
+    </div>
+
+    <div style="padding:18px 26px 8px; font-size:10.5px; letter-spacing:1.2px; color:#94a3b8; font-weight:600;">COMPANIES</div>
+    <div style="padding:0 14px;">
+      <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; font-size:14px; color:#475569; cursor:pointer;"><svg width="17" height="17" viewBox="0 0 24 24" fill="#94a3b8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6z"/></svg> Applicant</div>
+      <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; font-size:14px; color:#475569; cursor:pointer;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg> Vendor</div>
+    </div>
+
+    <div style="padding:14px 26px 8px; font-size:10.5px; letter-spacing:1.2px; color:#94a3b8; font-weight:600;">APPLICANT</div>
+    <div style="padding:0 14px;">
+      <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; font-size:14px; color:#475569; cursor:pointer;"><span style="color:#94a3b8; font-weight:700;">&#10077;</span> Quotation</div>
+      <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; font-size:14px; color:#475569; cursor:pointer;"><span style="color:#94a3b8; font-weight:700;">&#10078;</span> Quotation Approval</div>
+      <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; font-size:14px; color:#475569; cursor:pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M6 2h9l4 4v16H6z"/><path d="M9 9h7M9 13h7M9 17h4"/></svg> Invoice</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div style="flex:1; display:flex; flex-direction:column; min-width:0;">
+    <header style="height:72px; background:#fff; display:flex; align-items:center; padding:0 26px; gap:16px; box-shadow:0 1px 2px rgba(0,0,0,.04);">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="2.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <div style="flex:1;"></div>
+      <div style="width:44px; height:44px; border-radius:50%; border:1px solid #e2e8f0; display:flex; align-items:center; justify-content:center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; border:1px solid #e2e8f0; border-radius:24px; padding:6px 14px 6px 8px;">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="#cbd5e1"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6z"/></svg>
+        <span style="font-size:14px; color:#475569;">admin@admin.com</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </header>
+
+    <main style="flex:1; padding:22px 26px 40px; min-width:0;">
+      <div style="background:#dbe1ec; border-radius:8px; padding:16px 22px; color:#7c8699; font-size:15px; margin-bottom:20px;">Home <span style="margin:0 8px; color:#aab3c4;">/</span> <span style="color:#5b6478;">Project Timeline</span></div>
+
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+        <div>
+          <h1 style="margin:0; font-size:26px; font-weight:600; color:#3f4759;">Project Timeline</h1>
+          <p style="margin:6px 0 0; font-size:13.5px; color:#8b94a7;">Variance tracking by application &mdash; target vs actual across every permit milestone.</p>
+        </div>
+      </div>
+
+      <!-- FILTER CARD (Search Application style) -->
+      <div style="background:#fff; border-radius:12px; box-shadow:0 8px 20px rgba(30,41,80,.06); padding:22px 24px 26px; margin-bottom:22px;">
+        <div style="display:flex; align-items:center; gap:9px; margin-bottom:18px;">
+          <span style="width:4px; height:18px; background:#2f6bff; border-radius:2px;"></span>
+          <span style="font-weight:700; font-size:16px; color:#34404f;">Search Application</span>
+          <span style="width:17px; height:17px; border-radius:50%; background:#2f8bff; color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center;">?</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <!-- search (full width) -->
+          <div style="grid-column:1 / -1; display:flex; align-items:center; gap:10px; background:#f4f5f8; border:1px solid transparent; border-radius:10px; padding:0 16px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9aa3b4" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <input placeholder="Search by Application No. or project name" value="{{ search }}" onInput="{{ setSearch }}" style="border:none; outline:none; background:transparent; font-family:inherit; font-size:14px; color:#475569; width:100%; padding:15px 0;" />
+          </div>
+
+          <!-- status -->
+          <select value="{{ status }}" onChange="{{ setStatus }}" style="grid-column:1 / -1; width:100%; appearance:none; -webkit-appearance:none; background-color:#f4f5f8; background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2214%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2394a3b8%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>'); background-repeat:no-repeat; background-position:right 16px center; border:1px solid #c9d8f5; border-radius:10px; padding:15px 40px 15px 16px; font-family:inherit; font-size:14px; color:#475569; cursor:pointer; outline:none;">
+            <sc-for list="{{ statusOptions }}" as="o" hint-placeholder-count="4">
+              <option value="{{ o.value }}">{{ o.label }}</option>
+            </sc-for>
+          </select>
+
+          <!-- which date column to filter on -->
+          <div style="grid-column:1 / -1; background:#f4f5f8; border:1px solid transparent; border-radius:10px; padding:7px 16px 9px;">
+            <div style="font-size:10.5px; color:#9aa3b4; font-weight:500; letter-spacing:.2px;">Filter Date By</div>
+            <select value="{{ dateField }}" onChange="{{ setDateField }}" style="width:100%; appearance:none; -webkit-appearance:none; background-color:transparent; background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2214%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2394a3b8%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>'); background-repeat:no-repeat; background-position:right 2px center; border:none; outline:none; font-family:inherit; font-size:14px; color:#475569; cursor:pointer; padding:1px 24px 1px 0;">
+              <sc-for list="{{ dateFieldOptions }}" as="o" hint-placeholder-count="20">
+                <option value="{{ o.value }}">{{ o.label }}</option>
+              </sc-for>
+            </select>
+          </div>
+
+          <!-- date from -->
+          <div style="background:#f4f5f8; border:1px solid transparent; border-radius:10px; padding:7px 16px 9px;">
+            <div style="font-size:10.5px; color:#9aa3b4; font-weight:500; letter-spacing:.2px;">{{ dateFieldLabel }} &mdash; From</div>
+            <input type="date" value="{{ from }}" onChange="{{ setFrom }}" style="border:none; outline:none; background:transparent; font-family:inherit; font-size:14px; color:#475569; width:100%;" />
+          </div>
+
+          <!-- date to -->
+          <div style="background:#f4f5f8; border:1px solid transparent; border-radius:10px; padding:7px 16px 9px;">
+            <div style="font-size:10.5px; color:#9aa3b4; font-weight:500; letter-spacing:.2px;">{{ dateFieldLabel }} &mdash; To</div>
+            <input type="date" value="{{ to }}" onChange="{{ setTo }}" style="border:none; outline:none; background:transparent; font-family:inherit; font-size:14px; color:#475569; width:100%;" />
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:center; margin-top:24px;">
+          <button onClick="{{ clearFilters }}" style="display:flex; align-items:center; gap:9px; background:linear-gradient(180deg,#2f7bff,#1166ee); color:#fff; border:none; border-radius:26px; padding:13px 44px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; box-shadow:0 6px 16px rgba(37,99,235,.3);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 19v-5h5"/></svg> Reset Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- TABLE CARD -->
+      <div style="background:#fff; border-radius:12px; box-shadow:0 8px 20px rgba(30,41,80,.06); overflow:hidden;">
+        <div style="display:flex; align-items:center; gap:12px; padding:16px 22px; border-bottom:1px solid #eef1f6; flex-wrap:wrap;">
+          <span style="width:4px; height:18px; background:#2f6bff; border-radius:2px;"></span>
+          <span style="font-weight:600; font-size:16px; color:#3f4759;">Application Variance Tracking</span>
+          <span style="font-size:12px; color:#94a3b8; background:#f1f4f9; padding:3px 10px; border-radius:20px;">{{ appCount }} applications</span>
+          <div style="flex:1;"></div>
+          <button onClick="{{ exportExcel }}" style="display:flex; align-items:center; gap:8px; background:linear-gradient(180deg,#3b7bff,#2563eb); color:#fff; border:none; border-radius:8px; padding:9px 16px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; box-shadow:0 4px 12px rgba(37,99,235,.3);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Export Excel
+          </button>
+        </div>
+
+        <!-- scroll region -->
+        <div style="overflow:auto;">
+          <table style="border-collapse:separate; border-spacing:0; font-size:12.5px; white-space:nowrap;">
+            <thead>
+              <!-- phase band (top tier) -->
+              <tr>
+                <th rowspan="2" style="position:sticky; left:0; top:0; z-index:7; background:#2a3566; color:#fff; padding:12px 16px; text-align:center; font-weight:600; font-size:12px; width:184px; min-width:184px; max-width:184px; border-right:2px solid #cbd5e1;">No. Application</th>
+                <th rowspan="2" style="position:sticky; top:0; z-index:5; background:#2a3566; color:#fff; padding:12px 14px; text-align:center; font-weight:600; font-size:12px; width:210px; min-width:210px; max-width:210px; border-right:2px solid #fff;">Current Status</th>
+                <sc-for list="{{ phaseBands }}" as="p" hint-placeholder-count="4">
+                  <th colspan="{{ p.span }}" onClick="{{ p.toggle }}" title="Click to expand / collapse this phase" style="position:sticky; top:0; z-index:5; background:{{ p.bg }}; color:#fff; padding:10px 8px; text-align:center; font-weight:700; font-size:12px; letter-spacing:.3px; border-left:3px solid #fff; cursor:pointer; user-select:none;">
+                    <span style="display:inline-flex; align-items:center; gap:7px; justify-content:center; white-space:nowrap;"><span>{{ p.label }}</span><span style="width:16px; height:16px; border-radius:4px; background:rgba(255,255,255,.28); display:inline-flex; align-items:center; justify-content:center; font-size:13px; line-height:1;">{{ p.icon }}</span></span>
+                  </th>
+                </sc-for>
+              </tr>
+              <!-- exact column names -->
+              <tr>
+                <sc-for list="{{ subCols }}" as="s" hint-placeholder-count="32">
+                  <th onClick="{{ s.toggle }}" style="position:sticky; top:39px; z-index:3; background:{{ s.bg }}; color:{{ s.fg }}; padding:9px 10px; text-align:center; font-weight:600; font-size:10.5px; line-height:1.25; white-space:normal; min-width:{{ s.minW }}; cursor:{{ s.cursor }}; vertical-align:middle; border-left:{{ s.borderLeft }}; border-bottom:1px solid #e7ebf2;">{{ s.label }}</th>
+                </sc-for>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{ apps }}" as="a" hint-placeholder-count="7">
+                <tr style="border-bottom:1px solid #f1f4f9;">
+                  <td style="position:sticky; left:0; z-index:2; background:{{ a.rowBg }}; width:184px; min-width:184px; max-width:184px; padding:12px 16px; border-right:2px solid #e2e8f0; border-bottom:1px solid #f1f4f9;">
+                    <div style="font-weight:600; color:#2f6bff; font-size:12.5px;">{{ a.no }}</div>
+                    <div style="font-size:11px; color:#9aa3b4; margin-top:2px;">{{ a.project }}</div>
+                  </td>
+                  <td style="background:{{ a.rowBg }}; width:210px; min-width:210px; max-width:210px; padding:12px 14px; text-align:center; border-right:1px solid #f1f4f9; border-bottom:1px solid #f1f4f9;">
+                    <span style="font-size:12px; font-weight:700; color:#2f6bff; white-space:normal; line-height:1.3;">{{ a.wstatus }}</span>
+                  </td>
+                  <sc-for list="{{ a.cells }}" as="cell" hint-placeholder-count="30">
+                    <td style="padding:9px 12px; text-align:center; border-left:{{ cell.borderLeft }}; border-bottom:1px solid #f1f4f9; color:{{ cell.color }}; font-weight:{{ cell.weight }}; background:{{ cell.bg }};">
+                      {{ cell.text }}
+                      <sc-if value="{{ cell.onDetails }}" hint-placeholder-val="{{ false }}">
+                        <div onClick="{{ cell.onDetails }}" style="margin-top:3px; font-size:10px; font-weight:600; color:#2f6bff; cursor:pointer; text-decoration:underline;">Details</div>
+                      </sc-if>
+                    </td>
+                  </sc-for>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- pagination -->
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 22px; border-top:1px solid #eef1f6; flex-wrap:wrap; gap:10px;">
+          <div style="font-size:12.5px; color:#94a3b8;">Showing {{ pageRangeStart }}&ndash;{{ pageRangeEnd }} of {{ appCount }} applications</div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <button onClick="{{ goPrevPage }}" disabled="{{ canPrevPageDisabled }}" style="display:flex; align-items:center; gap:6px; background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:13px; font-weight:600; color:{{ prevColor }}; cursor:{{ prevCursor }}; font-family:inherit;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{ prevColor }}" stroke-width="2.5"><path d="M15 6l-6 6 6 6"/></svg> Prev
+            </button>
+            <span style="font-size:13px; color:#475569; font-weight:600;">Page {{ page }} of {{ totalPages }}</span>
+            <button onClick="{{ goNextPage }}" disabled="{{ canNextPageDisabled }}" style="display:flex; align-items:center; gap:6px; background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:8px 14px; font-size:13px; font-weight:600; color:{{ nextColor }}; cursor:{{ nextCursor }}; font-family:inherit;">
+              Next <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{ nextColor }}" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- JKR kawasan details modal -->
+  <sc-if value="{{ detailsApp }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeDetails }}" style="position:fixed; inset:0; background:rgba(30,41,80,.45); display:flex; align-items:center; justify-content:center; z-index:50;">
+      <div onClick="{{ stopClick }}" style="background:#fff; border-radius:12px; width:520px; max-width:90vw; max-height:80vh; overflow:auto; box-shadow:0 24px 60px rgba(0,0,0,.25);">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 22px; border-bottom:1px solid #eef1f6;">
+          <div>
+            <div style="font-weight:700; font-size:16px; color:#34404f;">{{ detailsApp.title }} &mdash; Kawasan Details</div>
+            <div style="font-size:12.5px; color:#9aa3b4; margin-top:2px;">{{ detailsApp.appNo }}</div>
+          </div>
+          <div onClick="{{ closeDetails }}" style="width:30px; height:30px; border-radius:50%; background:#f1f4f9; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#64748b;">&times;</div>
+        </div>
+        <div style="padding:8px 22px 22px;">
+          <div style="display:grid; grid-template-columns:{{ detailsApp.gridCols }}; gap:8px; padding:10px 0; font-size:11px; letter-spacing:.4px; color:#94a3b8; font-weight:700; text-transform:uppercase; border-bottom:1px solid #eef1f6;">
+            <div>Kawasan</div><div>Target</div><div>Actual</div><div>Variance</div>
+            <sc-if value="{{ detailsApp.showStatus }}" hint-placeholder-val="{{ false }}"><div>Status</div></sc-if>
+          </div>
+          <sc-for list="{{ detailsApp.rows }}" as="r" hint-placeholder-count="3">
+            <div style="display:grid; grid-template-columns:{{ detailsApp.gridCols }}; gap:8px; padding:12px 0; font-size:13px; color:#475569; border-bottom:1px solid #f7f8fb; align-items:center;">
+              <div>
+                <div style="font-weight:600; color:#334155;">{{ r.name }}</div>
+                <sc-if value="{{ r.agency }}" hint-placeholder-val="{{ false }}">
+                  <span style="display:inline-block; margin-top:3px; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:700; letter-spacing:.3px; color:{{ r.agencyColor }}; background:{{ r.agencyBg }};">{{ r.agency }}</span>
+                </sc-if>
+              </div>
+              <div>{{ r.target }}</div>
+              <div>{{ r.actual }}</div>
+              <div style="font-weight:600;">{{ r.variance }}</div>
+              <sc-if value="{{ detailsApp.showStatus }}" hint-placeholder-val="{{ false }}">
+                <div>
+                  <span style="display:inline-block; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:700; letter-spacing:.2px; color:{{ r.statusColor }}; background:{{ r.statusBg }}; white-space:normal; line-height:1.3;">{{ r.status }}</span>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { dashOpen: true, search: '', phases: { 1:true, 2:true, 3:true, 4:true }, phaseOpen: false, status: 'all', dateField: 0, from: '', to: '', detailsApp: null, page: 1 };
+
+  renderVals() {
+    const subDefs = ['Permit Application', 'Analytic', 'JKR Analytic', 'Project Management', 'Project Timeline'];
+    const active = 'Project Timeline';
+    const subItems = subDefs.map(label => ({
+      label, go: () => {},
+      color: label === active ? '#2f6bff' : '#5b6478',
+      weight: label === active ? 600 : 400,
+      bg: label === active ? 'rgba(47,107,255,.08)' : 'transparent'
+    }));
+
+    // ----- milestone definition (mirrors the spreadsheet) -----
+    // type: 'single' = one date column; 'triple' = Target / Actual / Variance
+    const milestones = [
+      { name: 'Izinlalu Submitted', type: 'single', base: true, phase: 1, labels: ['Izinlalu Submitted'] },
+      { name: 'Site Visit',         type: 'triple', tOff: 7,  phase: 1, labels: ['Targetted Site Visit','Actual Site Visit','Site Visit Variance'] },
+      { name: 'UDM Submission',     type: 'triple', tOff: 12, phase: 1, labels: ['Targetted UDM Submission','Actual UDM Submission','UDM Submission Variance'] },
+      { name: 'JKR/Majlis Approval', type: 'triple', tOff: 40, phase: 1, labels: ['Target JKR/Majlis Approval','Actual JKR/Majlis Approval','JKR/Majlis Approval Variance'] },
+      { name: 'Permit Submission',  type: 'triple', tAfter: 'JKR/Majlis Approval', tAdd: 7,        phase: 2, labels: ['Targetted Permit Submisison','Actual Permit Submission','Permit Submission Variance'] },
+      { name: 'Site Pegging',       type: 'triple', tAfter: 'Permit Submission', tAdd: 9,   phase: 2, labels: ['Targetted Site Pegging','Actual Site Pegging','Site Pegging Variance'] },
+      { name: 'Work Notice',        type: 'triple', tAfter: 'Site Pegging', tAdd: 1,        phase: 2, labels: ['Target Work Notice','Actual Work Notice','Work Notice Variance'] },
+      { name: 'Work Completed',     type: 'single', actOnly: true,                          phase: 3, labels: ['Work Completed'] },
+      { name: 'As-Built',           type: 'triple', tAfter: 'Work Completed', tAdd: 2,      phase: 3, labels: ['Targeted As-Built','Actual As-Built','As-Built Variance'] },
+      { name: 'CPC Inspection',     type: 'triple', tAfter: 'As-Built', tAdd: 10,           phase: 3, labels: ['Target CPC Inspection','Actual CPC Inspection','CPC Variance'] },
+      { name: 'CCC Submission',     type: 'triple', tAfter: 'CPC Inspection', tAdd: 2,      phase: 4, labels: ['Targeted CCC Submission','Actual CCC Submission','CCC Submission Variance'] },
+      { name: 'CCC Inspection',     type: 'triple', tAfter: 'CCC Submission', tAdd: 9,      phase: 4, labels: ['Targeted CCC Inspection','Actual CCC Inspection','CCC Inspection Variance'] },
+    ];
+
+    // each phase owns a colour family; milestone groups use a lighter tint of it
+    const phaseTheme = {
+      1: { band:'#2f6bff', tintA:'#eef3ff', tintB:'#e3ecff', fg:'#2f6bff', label:'Phase 1' },
+      2: { band:'#7c3aed', tintA:'#f3edff', tintB:'#eae5ff'.replace('e5','e6'), fg:'#7c3aed', label:'Phase 2' },
+      3: { band:'#0f9488', tintA:'#e6fbf8', tintB:'#d6f6f1', fg:'#0f9488', label:'Phase 3' },
+      4: { band:'#d97706', tintA:'#fff4e6', tintB:'#ffe9c9', fg:'#b45309', label:'Phase 4' },
+    };
+    // fix tintB for phase2 explicitly
+    phaseTheme[2].tintB = '#ebe2ff';
+
+    // ---- phase band (top header tier) ----
+    const bandDefs = [];
+    [1,2,3,4].forEach(pn => {
+      const ms = milestones.filter(m => m.phase === pn);
+      const span = ms.reduce((s,m) => s + (m.type === 'single' ? 1 : 3), 0);
+      bandDefs.push({ label: phaseTheme[pn].label, span, bg: phaseTheme[pn].band, phase: pn });
+    });
+
+    // ---- milestone group tier ---- (alternate tint within a phase)
+    const groups = [];
+    let phaseSeen = {};
+    milestones.forEach((mn) => {
+      phaseSeen[mn.phase] = (phaseSeen[mn.phase] || 0) + 1;
+      const th = phaseTheme[mn.phase];
+      groups.push({
+        name: mn.name,
+        span: mn.type === 'single' ? 1 : 3,
+        bg: (phaseSeen[mn.phase] % 2) ? th.tintA : th.tintB,
+        fg: th.fg,
+      });
+    });
+
+    // ---- column header tier (exact spreadsheet names) ----
+    const colDefs = [];
+    phaseSeen = {};
+    milestones.forEach((mn) => {
+      phaseSeen[mn.phase] = (phaseSeen[mn.phase] || 0) + 1;
+      const th = phaseTheme[mn.phase];
+      const tint = (phaseSeen[mn.phase] % 2) ? th.tintA : th.tintB;
+      mn.labels.forEach((lab, k) => {
+        // variance = the 3rd column of a triple; everything else is a date column
+        const kind = (mn.type === 'triple' && k === 2) ? 'variance' : 'date';
+        colDefs.push({ label: lab, bg: tint, fg: th.fg, phase: mn.phase, kind, colIndex: colDefs.length, borderLeft: k === 0 ? '2px solid #fff' : '1px solid #eef1f6' });
+      });
+    });
+
+    // ----- date helpers -----
+    const MS = 86400000;
+    const fmt = (d) => d ? (d.getDate() + ' ' + ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()] + " '" + String(d.getFullYear()).slice(2)) : '';
+    const addDays = (d, n) => new Date(d.getTime() + n * MS);
+
+    // variance color styling
+    const varStyle = (v) => {
+      if (v === null) return { text: '\u2014', color: '#94a3b8', weight: 400, bg: '#fff' };
+      return { text: v + (Math.abs(v) === 1 ? ' day' : ' days'), color: '#475569', weight: 500, bg: '#fff' };
+    };
+    const dateCell = (d, bl) => ({ text: d ? fmt(d) : '\u2014', color: d ? '#475569' : '#b6bdc9', weight: 400, bg: '#fff', borderLeft: bl });
+
+    // application workflow status styling — current status per application
+    const wsTheme = {
+      'Create New Permit Application':  { bg:'#eef3ff', color:'#2f6bff' },
+      'Join Site Visit':                { bg:'#e6fbf8', color:'#0f9488' },
+      'Pending Payment':                { bg:'#fff4e6', color:'#b45309' },
+      'UDM in Progress':                { bg:'#ebe2ff', color:'#7c3aed' },
+      'Wayleave':                       { bg:'#eef1ff', color:'#4f46e5' },
+      'Processing Permit':              { bg:'#dbeafe', color:'#1d4ed8' },
+      'Permit Issued':                  { bg:'#dcfce7', color:'#15803d' },
+      'Processing CPC':                 { bg:'#ffe9c9', color:'#d97706' },
+      'CCC Issuance':                   { bg:'#dcfce7', color:'#16a34a' },
+      'Project Cancelled/Rejected':     { bg:'#fee2e2', color:'#dc2626' },
+    };
+
+    // ----- sample applications -----
+    const seedData = [
+      { no:'KUJ/IZL/2026/0001', project:'TM Fiber Backbone', start:'2026-01-06', vars:[1,-2,3,2,0,2,1,5,8,2,-1,4], done:13, status:'CCC Issuance', kawasan:[{name:'Kawasan Bandar Johor Bahru', days:0},{name:'Kawasan Tampoi', days:1}], majlisKawasan:[{name:'Majlis Bandaraya Johor Bahru', days:0},{name:'Majlis Perbandaran Johor Bahru Tengah', days:2}], siteVisitKawasan:[{name:'Kawasan Bandar Johor Bahru', agency:'JKR', days:0},{name:'Kawasan Tampoi', agency:'JKR', days:1},{name:'Majlis Bandaraya Johor Bahru', agency:'Majlis', days:2},{name:'Majlis Perbandaran Johor Bahru Tengah', agency:'Majlis', days:1}], cpcKawasan:[{name:'Kawasan Bandar Johor Bahru', agency:'JKR', days:0},{name:'Kawasan Tampoi', agency:'JKR', days:2}], cccSubKawasan:[{name:'Kawasan Bandar Johor Bahru', agency:'JKR', days:0},{name:'Majlis Bandaraya Johor Bahru', agency:'Majlis', days:1}], cccInspKawasan:[{name:'Kawasan Bandar Johor Bahru', agency:'JKR', days:0},{name:'Kawasan Tampoi', agency:'JKR', days:1},{name:'Majlis Bandaraya Johor Bahru', agency:'Majlis', days:3}], asBuiltKawasan:[{name:'Kawasan Bandar Johor Bahru', agency:'JKR', days:0},{name:'Kawasan Tampoi', agency:'JKR', days:1}], permitSubKawasan:[{name:'Kawasan Bandar Johor Bahru', agency:'JKR', days:0},{name:'Kawasan Tampoi', agency:'JKR', days:1}], workNoticeKawasan:[{name:'Kawasan Bandar Johor Bahru', agency:'JKR', days:0},{name:'Kawasan Tampoi', agency:'JKR', days:2}] },
+      { no:'KUJ/IZL/2026/0002', project:'TNB Cable Trench JB', start:'2026-01-13', vars:[0,1,-3,-2,2,1,4,2,3,1,2,0], done:13, status:'CCC Issuance', cpcKawasan:[{name:'Kawasan Larkin', agency:'JKR', days:0},{name:'Majlis Bandaraya Johor Bahru', agency:'Majlis', days:1}], cccSubKawasan:[{name:'Kawasan Larkin', agency:'JKR', days:0},{name:'Majlis Bandaraya Johor Bahru', agency:'Majlis', days:2}], cccInspKawasan:[{name:'Kawasan Larkin', agency:'JKR', days:0},{name:'Majlis Bandaraya Johor Bahru', agency:'Majlis', days:0}], asBuiltKawasan:[{name:'Kawasan Larkin', agency:'JKR', days:0},{name:'Majlis Bandaraya Johor Bahru', agency:'Majlis', days:1}], permitSubKawasan:[{name:'Kawasan Larkin', agency:'JKR', days:0},{name:'Majlis Bandaraya Johor Bahru', agency:'Majlis', days:1}], workNoticeKawasan:[{name:'Kawasan Larkin', agency:'JKR', days:0},{name:'Majlis Bandaraya Johor Bahru', agency:'Majlis', days:0}] },
+      { no:'KUJ/IZL/2026/0003', project:'Air Johor Pipeline', start:'2026-02-02', vars:[2,5,7,4,1,3,2,9,1,4,3,6], done:10, status:'Processing CPC', kawasan:[{name:'Kawasan Pasir Gudang', days:0},{name:'Kawasan Plentong', days:2},{name:'Kawasan Masai', days:-1}], siteVisitKawasan:[{name:'Kawasan Pasir Gudang', agency:'JKR', days:0},{name:'Kawasan Plentong', agency:'JKR', days:2},{name:'Kawasan Masai', agency:'JKR', days:-1},{name:'Majlis Perbandaran Pasir Gudang', agency:'Majlis', days:1}], cpcKawasan:[{name:'Kawasan Pasir Gudang', agency:'JKR', days:0},{name:'Kawasan Plentong', agency:'JKR', days:1},{name:'Kawasan Masai', agency:'JKR', days:2}], cccSubKawasan:[{name:'Kawasan Pasir Gudang', agency:'JKR', days:0},{name:'Majlis Perbandaran Pasir Gudang', agency:'Majlis', days:1}] },
+      { no:'KUJ/IZL/2026/0004', project:'SWM Drainage Relocation', start:'2026-02-17', vars:[-1,0,1,1,0,2,1], done:7, status:'Wayleave', siteVisitKawasan:[{name:'Kawasan Kluang', agency:'JKR', days:0},{name:'Majlis Perbandaran Kluang', agency:'Majlis', days:1}] },
+      { no:'KUJ/IZL/2026/0005', project:'Gas Malaysia Main', project2:'', start:'2026-03-03', vars:[3,2,4,0,1], done:5, status:'UDM in Progress' },
+      { no:'KUJ/IZL/2026/0006', project:'Celcom Tower Link', start:'2026-03-23', vars:[0,-1,2], done:3, status:'Pending Payment', siteVisitKawasan:[{name:'Kawasan Iskandar Puteri', agency:'JKR', days:0},{name:'Majlis Bandaraya Iskandar Puteri', agency:'Majlis', days:-1}] },
+      { no:'KUJ/IZL/2026/0007', project:'IWK Sewerage Phase 2', start:'2026-04-06', vars:[1], done:1, status:'Join Site Visit' },
+      { no:'KUJ/IZL/2026/0008', project:'Astro Fibre Rollout', start:'2026-04-20', vars:[], done:0, status:'Create New Permit Application' },
+      { no:'KUJ/IZL/2026/0009', project:'Maxis Tower Upgrade', start:'2026-04-27', vars:[0,1], done:2, status:'Join Site Visit' },
+      { no:'KUJ/IZL/2026/0010', project:'Indah Water Trunkline', start:'2026-05-04', vars:[2,-1,4,3,1,2,0,1,3,2,1,4], done:13, status:'CCC Issuance', siteVisitKawasan:[{name:'Kawasan Tebrau', agency:'JKR', days:0},{name:'Kawasan Ulu Tiram', agency:'JKR', days:1},{name:'Majlis Perbandaran Tebrau', agency:'Majlis', days:2}], cpcKawasan:[{name:'Kawasan Tebrau', agency:'JKR', days:0},{name:'Kawasan Ulu Tiram', agency:'JKR', days:1}], cccSubKawasan:[{name:'Kawasan Tebrau', agency:'JKR', days:0},{name:'Majlis Perbandaran Tebrau', agency:'Majlis', days:2}], cccInspKawasan:[{name:'Kawasan Tebrau', agency:'JKR', days:0},{name:'Kawasan Ulu Tiram', agency:'JKR', days:2},{name:'Majlis Perbandaran Tebrau', agency:'Majlis', days:1}], asBuiltKawasan:[{name:'Kawasan Tebrau', agency:'JKR', days:0},{name:'Kawasan Ulu Tiram', agency:'JKR', days:1}], permitSubKawasan:[{name:'Kawasan Tebrau', agency:'JKR', days:0},{name:'Kawasan Ulu Tiram', agency:'JKR', days:1}], workNoticeKawasan:[{name:'Kawasan Tebrau', agency:'JKR', days:0},{name:'Majlis Perbandaran Tebrau', agency:'Majlis', days:2}] },
+      { no:'KUJ/IZL/2026/0011', project:'SAJ Water Pipeline Skudai', start:'2026-05-11', vars:[1,0,2], done:3, status:'Pending Payment' },
+      { no:'KUJ/IZL/2026/0012', project:'Digi Telco Ducting', start:'2026-05-18', vars:[-1,2,1,0,3], done:5, status:'UDM in Progress' },
+      { no:'KUJ/IZL/2026/0013', project:'TNB Substation Feeder', start:'2026-05-25', vars:[0,-2,1,3,2,1,4], done:7, status:'Wayleave', siteVisitKawasan:[{name:'Kawasan Kulaijaya', agency:'JKR', days:0},{name:'Majlis Perbandaran Kulaijaya', agency:'Majlis', days:1}] },
+      { no:'KUJ/IZL/2026/0014', project:'Petronas Gas Spur Line', start:'2026-06-01', vars:[3,1,2,0,1,2,3,1,0], done:9, status:'Processing Permit', kawasan:[{name:'Kawasan Kulai', days:0},{name:'Kawasan Senai', days:1}] },
+      { no:'KUJ/IZL/2026/0015', project:'U Mobile Cell Site JB', start:'2026-06-08', vars:[1], done:1, status:'Join Site Visit' },
+      { no:'KUJ/IZL/2026/0016', project:'Time Fibre Backhaul', start:'2026-06-15', vars:[], done:0, status:'Project Cancelled/Rejected' },
+      { no:'KUJ/IZL/2026/0017', project:'IWK Sewerage Skudai', start:'2026-06-22', vars:[0,1,-1,2], done:4, status:'UDM in Progress' },
+      { no:'KUJ/IZL/2026/0018', project:'TNB Cable Relocation Larkin', start:'2026-06-29', vars:[2,3,1,0,2,1,3,2,1,4,0,1], done:13, status:'Permit Issued', siteVisitKawasan:[{name:'Kawasan Larkin', agency:'JKR', days:0},{name:'Kawasan Stulang', agency:'JKR', days:2},{name:'Majlis Bandaraya Johor Bahru', agency:'Majlis', days:1}], cpcKawasan:[{name:'Kawasan Larkin', agency:'JKR', days:0},{name:'Kawasan Stulang', agency:'JKR', days:1}], cccSubKawasan:[{name:'Kawasan Larkin', agency:'JKR', days:0},{name:'Majlis Bandaraya Johor Bahru', agency:'Majlis', days:2}], cccInspKawasan:[{name:'Kawasan Larkin', agency:'JKR', days:0},{name:'Kawasan Stulang', agency:'JKR', days:2},{name:'Majlis Bandaraya Johor Bahru', agency:'Majlis', days:2}] },
+      { no:'KUJ/IZL/2026/0019', project:'Air Selangor Trunk Main', start:'2026-01-20', vars:[1,2,0,3,1], done:5, status:'UDM in Progress', majlisKawasan:[{name:'Majlis Perbandaran Kulai', days:0},{name:'Majlis Daerah Simpang Renggam', days:1}] },
+      { no:'KUJ/IZL/2026/0020', project:'Celcom Fibre Extension', start:'2026-02-24', vars:[0,-1,2,1,3,2,1,0,4,2,1,3], done:13, status:'CCC Issuance', siteVisitKawasan:[{name:'Kawasan Skudai', agency:'JKR', days:0},{name:'Majlis Perbandaran Skudai', agency:'Majlis', days:2}], cpcKawasan:[{name:'Kawasan Skudai', agency:'JKR', days:0},{name:'Majlis Perbandaran Skudai', agency:'Majlis', days:1}], cccSubKawasan:[{name:'Kawasan Skudai', agency:'JKR', days:0},{name:'Majlis Perbandaran Skudai', agency:'Majlis', days:0}], cccInspKawasan:[{name:'Kawasan Skudai', agency:'JKR', days:0},{name:'Majlis Perbandaran Skudai', agency:'Majlis', days:3}], asBuiltKawasan:[{name:'Kawasan Skudai', agency:'JKR', days:0},{name:'Majlis Perbandaran Skudai', agency:'Majlis', days:1}], permitSubKawasan:[{name:'Kawasan Skudai', agency:'JKR', days:0},{name:'Majlis Perbandaran Skudai', agency:'Majlis', days:1}], workNoticeKawasan:[{name:'Kawasan Skudai', agency:'JKR', days:0},{name:'Majlis Perbandaran Skudai', agency:'Majlis', days:0}] },
+    ];
+
+    const rawApps = seedData.map((sd) => {
+      const x = new Date(sd.start + 'T00:00:00');
+      let completed = sd.done;
+      const cells = [];
+      const actuals = {};
+      let stepCount = 0;
+      let worst = 0;
+
+      milestones.forEach((mn, i) => {
+        if (mn.base) {
+          cells.push({ ...dateCell(x, '2px solid #e9edf3'), phase: mn.phase, dateVal: x });
+          actuals['__base'] = x;
+          return;
+        }
+        stepCount++;
+        const has = stepCount <= completed;
+        const reached = stepCount <= completed + 1; // current step's target is visible once it's the next pending action
+
+        if (mn.type === 'single') {
+          let act = null;
+          if (has) {
+            const prior = actuals['Work Notice'] || actuals['Site Pegging'] || x;
+            const v = (sd.vars[stepCount-1] != null) ? sd.vars[stepCount-1] : 0;
+            act = addDays(prior, 30 + v);
+            actuals[mn.name] = act;
+          }
+          cells.push(reached ? { ...dateCell(act, '2px solid #fff'), phase: mn.phase, dateVal: act } : { ...dateCell(null, '2px solid #fff'), phase: mn.phase, dateVal: null });
+          return;
+        }
+
+        if (!reached) {
+          cells.push({ ...dateCell(null, '2px solid #fff'), phase: mn.phase, dateVal: null });
+          cells.push({ ...dateCell(null, '1px solid #f1f4f9'), phase: mn.phase, dateVal: null });
+          cells.push({ text: '\u2014', color: '#94a3b8', weight: 400, bg: '#fafbfd', borderLeft: '1px solid #f1f4f9', phase: mn.phase, dateVal: null });
+          return;
+        }
+
+        let target;
+        if (mn.tOff != null) target = addDays(x, mn.tOff);
+        else {
+          const baseAct = actuals[mn.tAfter];
+          const baseRef = baseAct || addDays(x, 45 + i * 6);
+          target = addDays(baseRef, mn.tAdd);
+        }
+        let act = null, v = null, kawasanDetails = null;
+        if (has) {
+          v = (sd.vars[stepCount-1] != null) ? sd.vars[stepCount-1] : 0;
+          act = addDays(target, v);
+
+          // an application can involve several kawasan (zones) for JKR or Majlis approval, each approved on its own date —
+          // show the latest approval as the headline date, with a Details button to see every kawasan
+          let kawasanSrc = null;
+          if (mn.name === 'JKR/Majlis Approval') {
+            kawasanSrc = (sd.kawasan || []).map(k => ({ ...k, agency: 'JKR' }))
+              .concat((sd.majlisKawasan || []).map(k => ({ ...k, agency: 'Majlis' })));
+          } else if (mn.name === 'CPC Inspection') {
+            kawasanSrc = sd.cpcKawasan;
+          } else if (mn.name === 'CCC Submission') {
+            kawasanSrc = sd.cccSubKawasan;
+          } else if (mn.name === 'CCC Inspection') {
+            kawasanSrc = sd.cccInspKawasan;
+          } else if (mn.name === 'As-Built') {
+            kawasanSrc = sd.asBuiltKawasan;
+          } else if (mn.name === 'Permit Submission') {
+            kawasanSrc = sd.permitSubKawasan;
+          } else if (mn.name === 'Work Notice') {
+            kawasanSrc = sd.workNoticeKawasan;
+          }
+          if (kawasanSrc && kawasanSrc.length) {
+            const rows = kawasanSrc.map(k => ({ name: k.name, agency: k.agency || null, actD: addDays(act, k.days) }));
+            const latest = rows.reduce((m, r) => (r.actD > m.actD ? r : m), rows[0]);
+            act = latest.actD;
+            v = Math.round((act.getTime() - target.getTime()) / MS);
+            // resolution status per kawasan — mirrors "Kembali untuk Tindakan KUS" resolution list
+            // Site Visit is not an approval step, so it has no resolution status column
+            const noStatusSteps = ['Site Visit', 'CPC Inspection', 'CCC Submission', 'CCC Inspection', 'As-Built', 'Permit Submission', 'Work Notice'];
+            const showStatus = !noStatusSteps.includes(mn.name);
+            const resolveStatus = (variance) => {
+              if (variance <= 0) return { status: 'Lulus', statusColor: '#15803d', statusBg: '#dcfce7' };
+              if (variance <= 3) return { status: 'Kelulusan Bersyarat', statusColor: '#b45309', statusBg: '#fff4e6' };
+              if (variance <= 6) return { status: 'Dokumen Tidak Mencukupi', statusColor: '#64748b', statusBg: '#f1f5f9' };
+              return { status: 'Tidak Diluluskan', statusColor: '#dc2626', statusBg: '#fee2e2' };
+            };
+            kawasanDetails = {
+              appNo: sd.no,
+              title: mn.name,
+              showStatus,
+              gridCols: showStatus ? '1.5fr .85fr .85fr .7fr 1.2fr' : '1.6fr 1fr 1fr .8fr',
+              rows: rows.map(r => {
+                const rv = Math.round((r.actD.getTime() - target.getTime()) / MS);
+                const rs = showStatus ? resolveStatus(rv) : { status: '', statusColor: '#64748b', statusBg: '#f1f5f9' };
+                return {
+                  name: r.name, agency: r.agency,
+                  agencyColor: r.agency === 'JKR' ? '#2f6bff' : (r.agency === 'Majlis' ? '#7c3aed' : '#64748b'),
+                  agencyBg: r.agency === 'JKR' ? '#eef3ff' : (r.agency === 'Majlis' ? '#ebe2ff' : '#f1f5f9'),
+                  target: fmt(target), actual: fmt(r.actD), variance: rv + (Math.abs(rv) === 1 ? ' day' : ' days'),
+                  status: rs.status, statusColor: rs.statusColor, statusBg: rs.statusBg,
+                };
+              }),
+            };
+          }
+
+          actuals[mn.name] = act;
+          if (v > worst) worst = v;
+        }
+        cells.push({ ...dateCell(target, '2px solid #fff'), phase: mn.phase, dateVal: target });
+        cells.push({
+          ...dateCell(act, '1px solid #f1f4f9'), phase: mn.phase, dateVal: act,
+          kawasanDetails,
+          onDetails: kawasanDetails ? () => this.setState({ detailsApp: kawasanDetails }) : null,
+        });
+        const vs = varStyle(v);
+        cells.push({ text: vs.text, color: vs.color, weight: vs.weight, bg: vs.bg, borderLeft: '1px solid #f1f4f9', phase: mn.phase, dateVal: null });
+      });
+
+      const vstatus = worst > 3 ? 'critical' : (worst >= 1 ? 'minor' : 'ontime');
+      const wstatus = sd.status;
+      const wt = wsTheme[wstatus];
+      return { no: sd.no, project: sd.project, start: x, startMs: x.getTime(), cells, worst, vstatus, wstatus, wsBg: wt.bg, wsColor: wt.color };
+    });
+
+    // ----- apply filters -----
+    const st = this.state;
+    const expanded = st.phases; // true = phase expanded, false = collapsed
+    const q = (st.search || '').trim().toLowerCase();
+    const fromMs = st.from ? new Date(st.from + 'T00:00:00').getTime() : null;
+    const toMs   = st.to   ? new Date(st.to   + 'T23:59:59').getTime() : null;
+
+    // ----- collapsible phase columns -----
+    const togglePhase = (n) => () => this.setState(s => ({ phases: { ...s.phases, [n]: !s.phases[n] } }));
+
+    // band tier: each phase always present; collapsed → single narrow strip
+    const phaseBands = bandDefs.map(b => {
+      const open = !!expanded[b.phase];
+      return {
+        phase: b.phase, span: open ? b.span : 1, bg: b.bg, open, collapsed: !open,
+        label: open ? b.label : ('P' + b.phase),
+        icon: open ? '\u2013' : '+',
+        toggle: togglePhase(b.phase),
+      };
+    });
+
+    // column-name tier: expanded → real columns; collapsed → one placeholder
+    const subCols = [];
+    bandDefs.forEach(b => {
+      if (expanded[b.phase]) {
+        colDefs.filter(c => c.phase === b.phase).forEach(c => subCols.push({ ...c, collapsed: false, minW: '96px', cursor: 'default', toggle: () => {} }));
+      } else {
+        subCols.push({ collapsed: true, phase: b.phase, bg: b.bg + '22', fg: '#94a3b8', label: '', minW: '40px', cursor: 'pointer', borderLeft: '2px solid #fff', toggle: togglePhase(b.phase) });
+      }
+    });
+
+    // which date column the From/To range applies to
+    const dateFieldIdx = Number(st.dateField) || 0;
+
+    // row visibility
+    const filteredRaw = rawApps.filter(a => {
+      if (q && !(a.no.toLowerCase().includes(q) || a.project.toLowerCase().includes(q))) return false;
+      if (st.status !== 'all' && a.wstatus !== st.status) return false;
+      if (fromMs != null || toMs != null) {
+        const fc = a.cells[dateFieldIdx];
+        const dv = fc && fc.dateVal ? fc.dateVal.getTime() : null;
+        if (dv == null) return false; // no date for this milestone yet → excluded when a range is set
+        if (fromMs != null && dv < fromMs) return false;
+        if (toMs   != null && dv > toMs)   return false;
+      }
+      return true;
+    });
+
+    // ----- pagination: 10 applications per page -----
+    const pageSize = 10;
+    const totalPages = Math.max(1, Math.ceil(filteredRaw.length / pageSize));
+    const page = Math.min(Math.max(1, Number(st.page) || 1), totalPages);
+    const pageStart = (page - 1) * pageSize;
+    const pagedRaw = filteredRaw.slice(pageStart, pageStart + pageSize);
+
+    const apps = pagedRaw.map((a, idx) => {
+      const rowBg = idx % 2 ? '#fbfcfe' : '#fff';
+      const cells = [];
+      bandDefs.forEach(b => {
+        if (expanded[b.phase]) {
+          a.cells.filter(c => c.phase === b.phase).forEach(c => cells.push(c));
+        } else {
+          cells.push({ collapsed: true, text: '', bg: rowBg, color: '#cbd5e1', weight: 400, borderLeft: '2px solid #eef1f6', minW: '40px' });
+        }
+      });
+      return {
+        no: a.no, project: a.project,
+        wstatus: a.wstatus, wsBg: a.wsBg, wsColor: a.wsColor,
+        cells, rowBg,
+      };
+    });
+
+    // ----- stat cards (reflect filtered rows) -----
+    let onTime = 0, minor = 0, critical = 0;
+    filteredRaw.forEach(a => {
+      if (a.vstatus === 'critical') critical++; else if (a.vstatus === 'minor') minor++; else onTime++;
+    });
+    const stats = [
+      { label:'Total Applications', value: filteredRaw.length, accent:'#2f6bff', iconBg:'#eef3ff', icon:'\u2261' },
+      { label:'On Schedule', value: onTime, accent:'#16a34a', iconBg:'#e9f9ee', icon:'\u2713' },
+      { label:'Minor Delay', value: minor, accent:'#f59e0b', iconBg:'#fef5e7', icon:'!' },
+      { label:'Critical Delay', value: critical, accent:'#ef4444', iconBg:'#fdecec', icon:'\u26A0' },
+    ];
+
+    // ----- filter controls -----
+    const statusOptions = [{ value:'all', label:'All Current Status' }].concat(
+      Object.keys(wsTheme).map(s => ({ value: s, label: s }))
+    );
+    // date-column options for the "Filter date by" selector (exclude variance columns)
+    const dateFieldOptions = colDefs.filter(c => c.kind === 'date').map(c => ({ value: String(c.colIndex), label: c.label }));
+    const dateFieldLabel = (colDefs[dateFieldIdx] && colDefs[dateFieldIdx].label) || 'Izinlalu Submitted';
+
+    const phaseLabels = { 1:'Phase 1 \u00b7 Approval', 2:'Phase 2 \u00b7 Permit & Works', 3:'Phase 3 \u00b7 Works Completion', 4:'Phase 4 \u00b7 CPC & CCC' };
+    // ----- Excel export (matches what's currently on screen: filters, page, expand/collapse) -----
+    const exportExcel = () => {
+      const esc = (v) => String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      const cell = (txt, styleId) => '<Cell' + (styleId ? ' ss:StyleID="' + styleId + '"' : '') + '><Data ss:Type="String">' + esc(txt) + '</Data></Cell>';
+
+      // only expanded (non-collapsed) phases are exported
+      const expBands = bandDefs.filter(b => expanded[b.phase]);
+      const expCols  = colDefs.filter(c => expanded[c.phase]);
+
+      // header tier 1: phase bands (merged) — two leading columns for No./Status, each phase in its own colour
+      let bandRow = '<Row>';
+      bandRow += '<Cell ss:StyleID="hdr" ss:MergeAcross="1"><Data ss:Type="String"></Data></Cell>';
+      expBands.forEach(b => {
+        bandRow += '<Cell ss:StyleID="bandP' + b.phase + '"' + (b.span > 1 ? ' ss:MergeAcross="' + (b.span - 1) + '"' : '') + '><Data ss:Type="String">' + esc(b.label) + '</Data></Cell>';
+      });
+      bandRow += '</Row>';
+
+      // header tier 2: column names, tinted per phase
+      let colRow = '<Row>' + cell('No. Application', 'hdr') + cell('Status', 'hdr');
+      expCols.forEach(c => { colRow += cell(c.label, 'colP' + c.phase); });
+      colRow += '</Row>';
+
+      // data rows — mirrors exactly what's on screen: current page, filtered rows, expanded-phase columns only, no Details links
+      let body = '';
+      pagedRaw.forEach(a => {
+        let r = '<Row>' + cell(a.no) + cell(a.wstatus);
+        a.cells.filter(c => expanded[c.phase]).forEach(c => { r += cell(c.text === '\u2014' ? '' : c.text, 'dataP' + c.phase); });
+        r += '</Row>';
+        body += r;
+      });
+
+      const ncols = 2 + colDefs.length;
+      const phaseColors = {
+        1: { band:'#2F6BFF', tint:'#EEF3FF', fg:'#1D4ED8' },
+        2: { band:'#7C3AED', tint:'#EBE2FF', fg:'#6D28D9' },
+        3: { band:'#0F9488', tint:'#E6FBF8', fg:'#0F766E' },
+        4: { band:'#D97706', tint:'#FFF4E6', fg:'#B45309' },
+      };
+      const phaseStyles = [1,2,3,4].map(p =>
+        '<Style ss:ID="bandP' + p + '"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="' + phaseColors[p].band + '" ss:Pattern="Solid"/><Alignment ss:Horizontal="Center" ss:Vertical="Center"/></Style>' +
+        '<Style ss:ID="colP' + p + '"><Font ss:Bold="1" ss:Color="' + phaseColors[p].fg + '"/><Interior ss:Color="' + phaseColors[p].tint + '" ss:Pattern="Solid"/><Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/></Style>' +
+        '<Style ss:ID="dataP' + p + '"><Interior ss:Color="' + phaseColors[p].tint + '" ss:Pattern="Solid"/><Alignment ss:Horizontal="Center" ss:Vertical="Center"/></Style>'
+      ).join('');
+      const xml =
+        '<?xml version="1.0"?>' +
+        '<?mso-application progid="Excel.Sheet"?>' +
+        '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">' +
+        '<Styles>' +
+          '<Style ss:ID="hdr"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#2A3566" ss:Pattern="Solid"/><Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/></Style>' +
+          phaseStyles +
+        '</Styles>' +
+        '<Worksheet ss:Name="Project Timeline">' +
+        '<Table>' +
+        '<Column ss:Width="150"/><Column ss:Width="80"/>' +
+        Array(expCols.length).fill('<Column ss:Width="95"/>').join('') +
+        bandRow + colRow + body +
+        '</Table></Worksheet></Workbook>';
+
+      const pad = (n) => String(n).padStart(2, '0');
+      const fmtF = (d) => pad(d.getDate()) + '-' + ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()] + '-' + d.getFullYear();
+      let range = 'all';
+      if (st.from || st.to) {
+        const f = st.from ? fmtF(new Date(st.from + 'T00:00:00')) : 'start';
+        const t = st.to ? fmtF(new Date(st.to + 'T00:00:00')) : 'latest';
+        const field = dateFieldLabel.replace(/[^A-Za-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        range = field + '_' + f + '_to_' + t;
+      }
+      const fname = 'Project_Timeline_' + range + '.xls';
+
+      const blob = new Blob(['\ufeff' + xml], { type: 'application/vnd.ms-excel' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = fname;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+
+    return {
+      dashOpen: this.state.dashOpen,
+      caretRot: this.state.dashOpen ? '90deg' : '0deg',
+      toggleDash: () => this.setState(s => ({ dashOpen: !s.dashOpen })),
+      exportExcel,
+      subItems, phaseBands, subCols, apps, stats, appCount: filteredRaw.length,
+      page, totalPages,
+      pageRangeStart: filteredRaw.length ? pageStart + 1 : 0,
+      pageRangeEnd: Math.min(pageStart + pageSize, filteredRaw.length),
+      goPrevPage: () => this.setState(s => ({ page: Math.max(1, (Number(s.page)||1) - 1) })),
+      goNextPage: () => this.setState(s => ({ page: Math.min(totalPages, (Number(s.page)||1) + 1) })),
+      canPrevPage: page > 1,
+      canNextPage: page < totalPages,
+      canPrevPageDisabled: page <= 1,
+      canNextPageDisabled: page >= totalPages,
+      prevColor: page > 1 ? '#475569' : '#cbd5e1',
+      nextColor: page < totalPages ? '#475569' : '#cbd5e1',
+      prevCursor: page > 1 ? 'pointer' : 'not-allowed',
+      nextCursor: page < totalPages ? 'pointer' : 'not-allowed',
+      search: st.search,
+      setSearch: (e) => this.setState({ search: e.target.value, page: 1 }),
+      status: st.status, setStatus: (e) => this.setState({ status: e.target.value, page: 1 }),
+      statusOptions,
+      dateField: String(dateFieldIdx), setDateField: (e) => this.setState({ dateField: Number(e.target.value) }),
+      dateFieldOptions, dateFieldLabel,
+      from: st.from, to: st.to,
+      setFrom: (e) => this.setState({ from: e.target.value, page: 1 }),
+      setTo: (e) => this.setState({ to: e.target.value, page: 1 }),
+      clearFilters: () => this.setState({ search:'', phases:{1:true,2:true,3:true,4:true}, status:'all', dateField:0, from:'', to:'', page: 1 }),
+      detailsApp: st.detailsApp,
+      closeDetails: () => this.setState({ detailsApp: null }),
+      stopClick: (e) => e.stopPropagation(),
+    };
+  }
+}
+</script>
+</body>
+</html>
